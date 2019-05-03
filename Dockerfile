@@ -1,14 +1,13 @@
 FROM golang:1.7-alpine
 
-ENV SRC_PATH="/go/src/github.com/solher/styx"
+ENV SRC_PATH="/go/src/github.com/wa-labs/styx"
 
 RUN apk add --update git \
 && mkdir -p $SRC_PATH
 COPY . $SRC_PATH
 WORKDIR $SRC_PATH
 
-RUN go get -u github.com/Masterminds/glide \
-&& /go/bin/glide install \
+RUN dep ensure -v \
 && go build -v \
 && cp styx /usr/local/bin \
 && mkdir -p /app \

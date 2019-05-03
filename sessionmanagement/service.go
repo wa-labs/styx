@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	"github.com/solher/styx/sessions"
+	"github.com/wa-labs/styx/sessions"
 )
 
 // Service represents the session management service interface.

@@ -6,9 +6,9 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/solher/styx/policies"
-	"github.com/solher/styx/resources"
-	"github.com/solher/styx/sessions"
+	"github.com/wa-labs/styx/policies"
+	"github.com/wa-labs/styx/resources"
+	"github.com/wa-labs/styx/sessions"
 )
 
 // Service represents the authorization service interface.

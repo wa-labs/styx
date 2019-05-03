@@ -7,8 +7,8 @@ import (
 	"github.com/go-chi/chi"
 	stdopentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
-	"github.com/solher/styx/kitty"
-	"github.com/solher/styx/sessions"
+	"github.com/wa-labs/styx/kitty"
+	"github.com/wa-labs/styx/sessions"
 	"golang.org/x/net/context"
 
 	"github.com/go-kit/kit/log"

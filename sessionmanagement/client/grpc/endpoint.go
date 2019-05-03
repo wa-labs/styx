@@ -5,7 +5,7 @@ import (
 	"errors"
 
 	"github.com/go-kit/kit/endpoint"
-	"github.com/solher/styx/pb"
+	"github.com/wa-labs/styx/pb"
 )
 
 // Endpoints collects all of the endpoints that compose a session management service. It's

@@ -4,14 +4,14 @@ import (
 	"time"
 
 	"github.com/go-kit/kit/log"
-	client "github.com/solher/styx/sessionmanagement/client/grpc"
+	client "github.com/wa-labs/styx/sessionmanagement/client/grpc"
 
 	grpctransport "github.com/go-kit/kit/transport/grpc"
 	"github.com/golang/protobuf/ptypes"
 	stdopentracing "github.com/opentracing/opentracing-go"
-	"github.com/solher/styx/kitty"
-	"github.com/solher/styx/pb"
-	"github.com/solher/styx/sessions"
+	"github.com/wa-labs/styx/kitty"
+	"github.com/wa-labs/styx/pb"
+	"github.com/wa-labs/styx/sessions"
 	"golang.org/x/net/context"
 )
 

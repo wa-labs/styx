@@ -6,7 +6,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/solher/styx/resources"
+	"github.com/wa-labs/styx/resources"
 )
 
 type (

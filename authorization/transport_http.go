@@ -9,7 +9,7 @@ import (
 
 	"github.com/go-chi/chi"
 	stdopentracing "github.com/opentracing/opentracing-go"
-	"github.com/solher/styx/kitty"
+	"github.com/wa-labs/styx/kitty"
 	"golang.org/x/net/context"
 
 	"github.com/go-kit/kit/log"

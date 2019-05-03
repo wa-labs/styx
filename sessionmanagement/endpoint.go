@@ -4,7 +4,7 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/go-kit/kit/endpoint"
-	"github.com/solher/styx/sessions"
+	"github.com/wa-labs/styx/sessions"
 )
 
 // Endpoints collects all of the endpoints that compose a session management service. It's

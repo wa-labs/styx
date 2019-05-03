@@ -5,9 +5,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/solher/styx/config"
-	"github.com/solher/styx/policies"
-	"github.com/solher/styx/resources"
+	"github.com/wa-labs/styx/config"
+	"github.com/wa-labs/styx/policies"
+	"github.com/wa-labs/styx/resources"
 )
 
 var (

@@ -8,7 +8,7 @@ import (
 
 	redigo "github.com/garyburd/redigo/redis"
 	"github.com/pkg/errors"
-	"github.com/solher/styx/sessions"
+	"github.com/wa-labs/styx/sessions"
 )
 
 type sessionRepository struct {

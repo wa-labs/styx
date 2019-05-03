@@ -3,7 +3,7 @@ package grpc
 import (
 	"context"
 
-	"github.com/solher/styx/pb"
+	"github.com/wa-labs/styx/pb"
 )
 
 // Service represents the session management service interface.
