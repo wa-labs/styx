@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/go-chi/chi"
 	stdopentracing "github.com/opentracing/opentracing-go"
-	"github.com/pressly/chi"
-	"github.com/solher/kitty"
+	"github.com/solher/styx/kitty"
 	"golang.org/x/net/context"
 
 	"github.com/go-kit/kit/log"
@@ -36,7 +36,7 @@ func MakeHTTPHandler(ctx context.Context, endpoints Endpoints, tracer stdopentra
 		opt(handlerOpts)
 	}
 	authorizeTokenHandler := httptransport.NewServer(
-		ctx,
+		// ctx,
 		endpoints.AuthorizeTokenEndpoint,
 		DecodeHTTPAuthorizeTokenRequest(handlerOpts.accessTokenCookie, handlerOpts.accessTokenHeader, handlerOpts.requestURLHeader),
 		EncodeHTTPAuthorizeTokenResponse(handlerOpts.accessTokenHeader, handlerOpts.payloadHeader, handlerOpts.sessionHeader),
@@ -47,7 +47,7 @@ func MakeHTTPHandler(ctx context.Context, endpoints Endpoints, tracer stdopentra
 		)...,
 	)
 	redirectHandler := httptransport.NewServer(
-		ctx,
+		// ctx,
 		endpoints.RedirectEndpoint,
 		DecodeHTTPRedirectRequest(handlerOpts.requestURLHeader),
 		EncodeHTTPRedirectResponse(handlerOpts.redirectURLHeader, handlerOpts.redirectURLQueryParam),

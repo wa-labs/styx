@@ -9,7 +9,7 @@ import (
 	grpctransport "github.com/go-kit/kit/transport/grpc"
 	"github.com/golang/protobuf/ptypes"
 	stdopentracing "github.com/opentracing/opentracing-go"
-	"github.com/solher/kitty"
+	"github.com/solher/styx/kitty"
 	"github.com/solher/styx/pb"
 	"github.com/solher/styx/sessions"
 	"golang.org/x/net/context"
@@ -22,7 +22,7 @@ func MakeGRPCServer(ctx context.Context, endpoints Endpoints, tracer stdopentrac
 	}
 	return &grpcServer{
 		createSession: grpctransport.NewServer(
-			ctx,
+			// ctx,
 			endpoints.CreateSessionEndpoint,
 			DecodeGRPCCreateSessionRequest,
 			EncodeGRPCCreateSessionResponse,
@@ -33,7 +33,7 @@ func MakeGRPCServer(ctx context.Context, endpoints Endpoints, tracer stdopentrac
 			)...,
 		),
 		findSessionByToken: grpctransport.NewServer(
-			ctx,
+			// ctx,
 			endpoints.FindSessionByTokenEndpoint,
 			DecodeGRPCFindSessionByTokenRequest,
 			EncodeGRPCFindSessionByTokenResponse,
@@ -44,7 +44,7 @@ func MakeGRPCServer(ctx context.Context, endpoints Endpoints, tracer stdopentrac
 			)...,
 		),
 		deleteSessionByToken: grpctransport.NewServer(
-			ctx,
+			// ctx,
 			endpoints.DeleteSessionByTokenEndpoint,
 			DecodeGRPCDeleteSessionByTokenRequest,
 			EncodeGRPCDeleteSessionByTokenResponse,
@@ -55,7 +55,7 @@ func MakeGRPCServer(ctx context.Context, endpoints Endpoints, tracer stdopentrac
 			)...,
 		),
 		deleteSessionsByOwnerToken: grpctransport.NewServer(
-			ctx,
+			// ctx,
 			endpoints.DeleteSessionsByOwnerTokenEndpoint,
 			DecodeGRPCDeleteSessionsByOwnerTokenRequest,
 			EncodeGRPCDeleteSessionsByOwnerTokenResponse,

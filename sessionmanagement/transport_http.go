@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/go-chi/chi"
 	stdopentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
-	"github.com/pressly/chi"
-	"github.com/solher/kitty"
+	"github.com/solher/styx/kitty"
 	"github.com/solher/styx/sessions"
 	"golang.org/x/net/context"
 
@@ -23,28 +23,28 @@ func MakeHTTPHandler(ctx context.Context, endpoints Endpoints, tracer stdopentra
 		httptransport.ServerErrorLogger(logger),
 	}
 	createSessionHandler := httptransport.NewServer(
-		ctx,
+		// ctx,
 		endpoints.CreateSessionEndpoint,
 		DecodeHTTPCreateSessionRequest,
 		EncodeHTTPCreateSessionResponse,
 		append(opts, httptransport.ServerBefore(kitty.FromHTTPRequest(tracer, "Create session", logger)))...,
 	)
 	findSessionByTokenHandler := httptransport.NewServer(
-		ctx,
+		// ctx,
 		endpoints.FindSessionByTokenEndpoint,
 		DecodeHTTPFindSessionByTokenRequest,
 		EncodeHTTPFindSessionByTokenResponse,
 		append(opts, httptransport.ServerBefore(kitty.FromHTTPRequest(tracer, "Find session by token", logger)))...,
 	)
 	deleteSessionByTokenHandler := httptransport.NewServer(
-		ctx,
+		// ctx,
 		endpoints.DeleteSessionByTokenEndpoint,
 		DecodeHTTPDeleteSessionByTokenRequest,
 		EncodeHTTPDeleteSessionByTokenResponse,
 		append(opts, httptransport.ServerBefore(kitty.FromHTTPRequest(tracer, "Delete session by token", logger)))...,
 	)
 	deleteSessionByOwnerTokenHandler := httptransport.NewServer(
-		ctx,
+		// ctx,
 		endpoints.DeleteSessionsByOwnerTokenEndpoint,
 		DecodeHTTPDeleteSessionsByOwnerTokenRequest,
 		EncodeHTTPDeleteSessionsByOwnerTokenResponse,

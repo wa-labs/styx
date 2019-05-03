@@ -1,18 +1,20 @@
 package grpc
 
 import (
+	"time"
+
 	"github.com/go-kit/kit/circuitbreaker"
 	"github.com/go-kit/kit/endpoint"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/ratelimit"
 	"github.com/go-kit/kit/tracing/opentracing"
 	grpctransport "github.com/go-kit/kit/transport/grpc"
-	jujuratelimit "github.com/juju/ratelimit"
 	stdopentracing "github.com/opentracing/opentracing-go"
-	"github.com/solher/kitty"
+	"github.com/solher/styx/kitty"
 	"github.com/solher/styx/pb"
 	"github.com/sony/gobreaker"
 	"golang.org/x/net/context"
+	"golang.org/x/time/rate"
 	"google.golang.org/grpc"
 )
 
@@ -30,7 +32,9 @@ func New(conn *grpc.ClientConn, tracer stdopentracing.Tracer, logger log.Logger,
 	for _, opt := range opts {
 		opt(clientOpts)
 	}
-	limiter := ratelimit.NewTokenBucketLimiter(jujuratelimit.NewBucketWithRate(clientOpts.limiterRate, clientOpts.limiterCapacity))
+	limit := rate.NewLimiter(rate.Every(time.Minute), 100)
+	limiter := ratelimit.NewDelayingLimiter(limit)
+	// limiter := ratelimit.NewTokenBucketLimiter(jujuratelimit.NewBucketWithRate(clientOpts.limiterRate, clientOpts.limiterCapacity))
 	circuitbreaker := circuitbreaker.Gobreaker(gobreaker.NewCircuitBreaker(gobreaker.Settings{Name: "SessionManagement"}))
 	var createSessionEndpoint endpoint.Endpoint
 	{

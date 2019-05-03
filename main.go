@@ -17,16 +17,16 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	redigo "github.com/garyburd/redigo/redis"
+	"github.com/go-chi/chi"
 	"github.com/go-kit/kit/endpoint"
 	"github.com/go-kit/kit/log"
 	stdopentracing "github.com/opentracing/opentracing-go"
 	zipkin "github.com/openzipkin/zipkin-go-opentracing"
 	"github.com/pkg/errors"
-	"github.com/pressly/chi"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
-	"github.com/solher/kitty"
 	"github.com/solher/styx/authorization"
 	"github.com/solher/styx/config"
+	"github.com/solher/styx/kitty"
 	"github.com/solher/styx/memory"
 	"github.com/solher/styx/pb"
 	"github.com/solher/styx/redis"
@@ -123,15 +123,15 @@ func main() {
 	var logger log.Logger
 	{
 		logger = log.NewLogfmtLogger(os.Stderr)
-		logger = log.NewContext(logger).With("ts", log.DefaultTimestampUTC)
-		logger = log.NewContext(logger).With("caller", log.DefaultCaller)
+		logger = log.With(logger, "ts", log.DefaultTimestampUTC)
+		logger = log.With(logger, "caller", log.DefaultCaller)
 	}
 
 	// Tracing domain.
 	var tracer stdopentracing.Tracer
 	{
 		if *zipkinAddr != "" {
-			logger := log.NewContext(logger).With("tracer", "Zipkin")
+			logger := log.With(logger, "tracer", "Zipkin")
 			logger.Log("msg", "sending trace to "+*zipkinAddr)
 			collector, err := zipkin.NewScribeCollector(
 				*zipkinAddr,
@@ -150,7 +150,7 @@ func main() {
 				return
 			}
 		} else {
-			logger := log.NewContext(logger).With("tracer", "none")
+			logger := log.With(logger, "tracer", "none")
 			logger.Log("msg", "tracing disabled")
 			tracer = stdopentracing.GlobalTracer() // no-op
 		}
